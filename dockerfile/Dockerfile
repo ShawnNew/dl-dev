@@ -60,6 +60,5 @@ VOLUME ["/home/caffe/data","/home/caffe/codes"]
 WORKDIR /home/caffe
 USER caffe
 # Configure oh-my-zsh
-ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &&\
-    "/bin/zsh"
+ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
 
