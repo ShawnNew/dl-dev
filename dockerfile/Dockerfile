@@ -79,26 +79,8 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 # For Tensorflow
 RUN pip2 install --upgrade tensorflow-gpu
 
-# For user (naming dl stands for deep learning)
-RUN adduser dl --gecos "" --disabled-password &&\
-    echo "abcd\nabcd" |passwd dl &&\
-    chsh -s /bin/zsh dl &&\
-    adduser dl sudo &&\
-    cd /home &&\
-    chown -R dl:dl dl &&\
-    cd /home/dl &&\
-    su dl
-
-# Mount volume for data and codes
-ADD README.md /home/dl
-ENV WS=/home/dl  
-WORKDIR ${WS}
-VOLUME ["${WS}/data","${WS}/codes"]
 
 
-# Starting the image
-WORKDIR ${WS}
-USER dl
 # Configure oh-my-zsh
 ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
 
