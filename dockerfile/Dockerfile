@@ -58,8 +58,6 @@ RUN apt-get update && apt-get install -y \
     git lfs install &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# For Tensorflow
-# RUN 
 
 
 # For caffe
@@ -77,6 +75,9 @@ ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
 ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
 RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
+
+# For Tensorflow
+RUN pip2 install --upgrade tensorflow-gpu
 
 # For user (naming dl stands for deep learning)
 RUN adduser dl --gecos "" --disabled-password &&\
