@@ -16,7 +16,7 @@ echo "Container name is: ${CONTAINER_NAME}"
 echo "Start into docker image: ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}"
 
 if ! docker ps -a | grep ${CONTAINER_NAME};then
-    echo "No such container named ${CONTAINER_NAME}", starting."
+    echo "No such container named ${CONTAINER_NAME}, starting."
 else
     docker rm ${CONTAINER_NAME}
 fi

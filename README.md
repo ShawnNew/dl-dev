@@ -5,6 +5,7 @@ Support deep-learning platform list:
 |---------------| :------:| --------:|
 | Caffe    | 1.0.0   | C++, Python |
 
+
 ### How to use
 * First, you should download docker yourself :). Check the following infomation:
     * For [Mac](https://docs.docker.com/docker-for-mac/install/#what-to-know-before-you-install).
@@ -28,3 +29,4 @@ To build customized docker iamge yourself, please check [build reference](docker
 
 ### Issues
 Please contact `niuc@mcmaster.ca` for any issue.
+
