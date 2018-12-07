@@ -4,6 +4,13 @@ Support deep-learning platform list:
 | Platform Name | Version | Language |
 |---------------| :------:| --------:|
 | Caffe    | 1.0.0   | C++, Python |
+| Tensorflow | 1.12.0 | Python |
+
+### Prerequesties
+* GNU/Linux x86_64 with kernel version > 3.10
+* Docker >= 1.12
+* NVIDIA GPU with Architecture > Fermi (2.1)
+* [NVIDIA](https://www.nvidia.com/object/unix.html) drivers ~= 361.93 (untested on older versions)
 
 
 ### How to use
@@ -17,6 +24,7 @@ Support deep-learning platform list:
 * Reboot.
 * Then `cd scripts/` into scripts directory.
 * Run `./start_working.sh` and wait until `zsh` shows up.
+* The password of root is `abcd`.
 
 ### About the docker container
 * `zsh`: Use oh-my-zsh theme for shell, and support zsh functionalities. Kindly check this [websit](https://www.jianshu.com/p/d194d29e488c?open_source=weibo_search).
