@@ -24,6 +24,7 @@ Support deep-learning platform list:
 * Reboot.
 * Then `cd scripts/` into scripts directory.
 * Run `./start_working.sh` and wait until `zsh` shows up.
+* The password of root is `abcd`.
 
 ### About the docker container
 * `zsh`: Use oh-my-zsh theme for shell, and support zsh functionalities. Kindly check this [websit](https://www.jianshu.com/p/d194d29e488c?open_source=weibo_search).
