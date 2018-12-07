@@ -1,11 +1,12 @@
 # Set the base image
-ARG CAFFE_VERSION=gpu
-FROM bvlc/caffe:${CAFFE_VERSION}
+ARG CUDA_VERSION=9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:${CUDA_VERSION} AS cuda_image
 LABEL author="niuchenxiao<niuc@mcmaster.ca>"
 
 # change source
 # http://mirrors.tuna.tsinghua.edu.cn/
 # http://mirrors.ustc.edu.cn/
+FROM cuda_image
 RUN bash -c 'sed -i "s#http://archive.ubuntu.com/#http://mirrors.ustc.edu.cn/#" /etc/apt/sources.list; \
              sed -i "s#http://security.ubuntu.com/#http://mirrors.ustc.edu.cn/#" /etc/apt/sources.list;' && \
     bash -c '. /etc/lsb-release && echo "deb http://mirrors.ustc.edu.cn/ros/ubuntu/ xenial main" > /etc/apt/sources.list.d/ros-latest.list' && \
@@ -24,6 +25,23 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode st
     mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg && \
     apt-get update && apt-get install -y \
     # Other developing tools, name them here
+    build-essential \
+    libatlas-base-dev \
+    libboost-all-dev \
+    libgflags-dev \
+    libgoogle-glog-dev \
+    libhdf5-serial-dev \
+    libleveldb-dev \
+    liblmdb-dev \
+    libopencv-dev \
+    libprotobuf-dev \
+    libsnappy-dev \
+    protobuf-compiler \
+    python-dev \
+    python-numpy \
+    python-pip \
+    python-setuptools \
+    python-scipy \
     ssh htop tmux vim iputils-ping nginx aptitude gitg meld net-tools wget \
     git sudo zsh unzip zip screen \
     gcc gdb cppcheck libboost-all-dev cmake libxss1 \
@@ -40,25 +58,46 @@ RUN apt-get update && apt-get install -y \
     git lfs install &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# For user
-RUN adduser caffe --gecos "" --disabled-password &&\
-    echo "abcd\nabcd" |passwd caffe &&\
-    chsh -s /bin/zsh caffe &&\
-    adduser caffe sudo &&\
+# For Tensorflow
+# RUN 
+
+
+# For caffe
+ENV CAFFE_ROOT=/opt/caffe
+WORKDIR $CAFFE_ROOT
+RUN git clone https://github.com/BVLC/caffe.git . &&\
+    pip2 install --upgrade pip && \
+    cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
+    git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
+    mkdir build && cd build && \
+    cmake -DUSE_CUDNN=1 -DUSE_NCCL=1 .. && \
+    make
+
+ENV PYCAFFE_ROOT $CAFFE_ROOT/python
+ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
+ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
+RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
+
+# For user (naming dl stands for deep learning)
+RUN adduser dl --gecos "" --disabled-password &&\
+    echo "abcd\nabcd" |passwd dl &&\
+    chsh -s /bin/zsh dl &&\
+    adduser dl sudo &&\
     cd /home &&\
-    chown -R caffe:caffe caffe &&\
-    cd /home/caffe &&\
-    su caffe
+    chown -R dl:dl dl &&\
+    cd /home/dl &&\
+    su dl
 
 # Mount volume for data and codes
-ADD README.md /home/caffe
-WORKDIR /home/caffe
-VOLUME ["/home/caffe/data","/home/caffe/codes"]
+ADD README.md /home/dl
+ENV WS=/home/dl  
+WORKDIR ${WS}
+VOLUME ["${WS}/data","${WS}/codes"]
 
 
-# For start the image
-WORKDIR /home/caffe
-USER caffe
+# Starting the image
+WORKDIR ${WS}
+USER dl
 # Configure oh-my-zsh
 ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
 
