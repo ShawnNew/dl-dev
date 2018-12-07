@@ -1,6 +1,9 @@
-## This docker runs the caffe-gpu capable image (niuchenxiao/caffe-dev:gpu).
+## Docker image for deep-learning development.
+In this directory is some `Dockerfile`s that can build docker iamge. 
 
-* Please pull your code into `codes` folder in the `/home/caffe` directory, which is the workspace in the holding container.
-* You can also download data into the `data` folder under the `/home/caffe` directory.
-* You can `import caffe` in python interface. 
-
+To build the already-cooked image, run `docker build -t "${USER}/${IMAGE_NAME}:${VERSION} ."` in this specific directory.
+### Some notes:
+* You can read the reference about docker capability by invoking `docker --help` or check this [websit](https://docs.docker.com/reference/).
+* The `-t` parameter is used to tag the iamge for later use.
+* `${USER}` is an environment variable already set in ubuntu environment.
+* `${IMAGE_NAME}` and `${VERSION}` may not be set perfectly, so you need to **`IMAGE_NAME=your-specific-name`** and **`VERSION=your-specific-version`**.
