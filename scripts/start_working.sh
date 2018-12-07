@@ -4,9 +4,9 @@
 #
 
 # ------------------------ Variables. ----------------------------
-REPO_NAME=niuchenxiao
+REPO_NAME=shawn
 CONTAINER_NAME=dl-dev
-VERSION=test
+VERSION=tf-test
 
 echo "Repo name is: ${REPO_NAME}."
 echo "Container name is: ${CONTAINER_NAME}"
@@ -21,7 +21,7 @@ else
     docker rm ${CONTAINER_NAME}
 fi
 
-docker run -it \
+nvidia-docker run -it \
     --net="host" \
     --name=${CONTAINER_NAME} \
     -e DISPLAY=${DISPLAY} \
