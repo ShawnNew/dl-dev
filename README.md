@@ -4,6 +4,13 @@ Support deep-learning platform list:
 | Platform Name | Version | Language |
 |---------------| :------:| --------:|
 | Caffe    | 1.0.0   | C++, Python |
+| Tensorflow | 1.12.0 | Python |
+
+### Prerequesties
+* GNU/Linux x86_64 with kernel version > 3.10
+* Docker >= 1.12
+* NVIDIA GPU with Architecture > Fermi (2.1)
+* [NVIDIA](https://www.nvidia.com/object/unix.html) drivers ~= 361.93 (untested on older versions)
 
 
 ### How to use
