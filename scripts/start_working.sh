@@ -50,5 +50,10 @@ nvidia-docker run -it \
     --net="host" \
     --name=${CONTAINER_NAME} \
     -e DISPLAY=${DISPLAY} \
+    -e MYUID=$(id -u) \
+    -e MYGID=$(id -g) \
+    -e MYUSERNAME=$(id -un) \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME:$HOME \
+    -w $HOME \
     ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
