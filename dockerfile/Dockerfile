@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y  && apt-get install --no-install-recomm
     ca-certificates openssl \
     curl &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
-
+ADD Montreal /tmp/localtime
 # Development
 RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' && \
     curl "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > microsoft.gpg && \
@@ -42,6 +42,7 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode st
     python-pip \
     python-setuptools \
     python-scipy \
+    python-tk \
     ssh htop tmux vim iputils-ping nginx aptitude gitg meld net-tools wget \
     git sudo zsh unzip zip screen \
     gcc gdb cppcheck libboost-all-dev cmake libxss1 \
