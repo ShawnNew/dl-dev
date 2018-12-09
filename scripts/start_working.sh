@@ -46,7 +46,7 @@ else
     docker rm ${CONTAINER_NAME}
 fi
 echo "Pulling image from docker hub, please check your internet connection."
-docker pull ${REPO_NAME}:${CONTAINER_NAME}:${VERSION}
+docker pull ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
 
 nvidia-docker run -it \
     --net="host" \
@@ -58,4 +58,4 @@ nvidia-docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME:$HOME \
     -w $HOME \
-    test
+    ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
