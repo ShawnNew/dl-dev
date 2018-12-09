@@ -79,7 +79,8 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 # For Tensorflow
 RUN pip2 install --upgrade tensorflow-gpu
 
-
+ADD ./setup.sh /tmp/setup.sh
+RUN chmod -x /tmp/setup.sh
 
 # Configure oh-my-zsh
 ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
