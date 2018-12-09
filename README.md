@@ -24,6 +24,8 @@ Support deep-learning platform list:
 * Reboot.
 * Then `cd scripts/` into scripts directory.
 * Run `./start_working.sh` and wait until `zsh` shows up.
+* Run `bash /tmp/setup.sh` in the docker environment to create user for yourself.
+* Then you can walk around, the docker environment is the same as outside the environment.
 
 ### About the docker container
 * `zsh`: Use oh-my-zsh theme for shell, and support zsh functionalities. Kindly check this [websit](https://www.jianshu.com/p/d194d29e488c?open_source=weibo_search).

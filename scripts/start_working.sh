@@ -45,6 +45,8 @@ if ! docker ps -a | grep ${CONTAINER_NAME};then
 else
     docker rm ${CONTAINER_NAME}
 fi
+echo "Pulling image from docker hub, please check your internet connection."
+docker pull ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
 
 nvidia-docker run -it \
     --net="host" \
