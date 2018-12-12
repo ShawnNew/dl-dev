@@ -58,4 +58,5 @@ nvidia-docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME:$HOME \
     -w $HOME \
+    -p 6006:6006 \
     ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}

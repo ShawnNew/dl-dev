@@ -79,7 +79,9 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 
 # For Tensorflow
 RUN pip2 install --upgrade tensorflow-gpu
+EXPOSE 6006
 
+# Initialization
 ADD ./setup.sh /tmp/setup.sh
 RUN chmod -x /tmp/setup.sh
 
