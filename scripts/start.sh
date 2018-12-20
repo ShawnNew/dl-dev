@@ -7,6 +7,7 @@
 REPO_NAME=niuchenxiao
 CONTAINER_NAME=dl-dev
 VERSION=latest
+HOSTNAME=deep-learning-docker
 
 echo "Repo name is: ${REPO_NAME}."
 echo "Container name is: ${CONTAINER_NAME}"
@@ -28,7 +29,7 @@ docker pull ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
 # Run docker as detached
 nvidia-docker run --rm \
     -itd \
-    -h dl \
+    -h ${HOSTNAME} \
     --name=${CONTAINER_NAME} \
     -e DISPLAY=${DISPLAY} \
     -v /tmp/.X11-unix:/tmp/.X11-unix \

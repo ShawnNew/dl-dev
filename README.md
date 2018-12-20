@@ -21,14 +21,21 @@ Support deep-learning platform list:
     
     However, I highly recommend you use unix-like system since docker is well-supported on such OS.
 * After successfully installed docker, run command `sudo usermod -aG docker ${USER}` to add your self into user-group within system wide.
-* Reboot.
-* Then `cd scripts/` into scripts directory.
-* Run `./start_working.sh` and wait until `zsh` shows up.
-	![login](docs/docker-login.png)
-* Run `bash /tmp/setup.sh` in the docker environment to create user for yourself.
-* Then you can walk around, the docker environment is the same as outside the environment.
+* Reboot by invoking command `sudo reboot`.
+* Change directory into `cd $DIR-TO-DL-DEV`.
+* Install nvidia-docker for GPU usage, run command `./scripts/setup_nvidia_docker.sh`.
+* Then you can start docker by issuing the command `./scripts/start.sh`.
+* To get into the docker container, run `./scripts/into.sh`. It should looks like this:
+  
+  ![login](docs/docker-into.png)
 
 ### About the docker container
+* Within the docker container(dl-dev for this specific project), you are login as user "dl" and the *passwd is set to "abcd"*.
+* The directory of the workspace looks like this:
+
+    ![workspace](docs/workspace.png)
+* The 'Downloads' directory is mount to your host machine's Downloads directory, so you can store your data outside docker.
+* The 'Codes' directory is designed to store your code and project, this directory is invisible outside docker.
 * `zsh`: Use oh-my-zsh theme for shell, and support zsh functionalities. Kindly check this [websit](https://www.jianshu.com/p/d194d29e488c?open_source=weibo_search).
 * `VS Code`： You can issue `code` in zsh, then the container will open IDE in host machine.
 * `tmux`: The configuration of tmux is as default, you can check useful information in this [page](http://louiszhai.github.io/2017/09/30/tmux/).
