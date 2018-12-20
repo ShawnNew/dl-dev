@@ -1,0 +1,6 @@
+*.zsrc
+*.oh-my-zsh
+*.vimrc
+*.vimrc.bundles
+*.tmux.conf
+*.zshrc

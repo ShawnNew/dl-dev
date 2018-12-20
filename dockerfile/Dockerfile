@@ -91,14 +91,12 @@ RUN adduser dl --gecos "" --disabled-password &&\
     chown -R dl:dl dl &&\
     cd /home/dl &&\
     mkdir -p Codes &&\
-    chown dl:dl Codes &&\ 
+    chown -R dl:dl Codes &&\ 
     su dl 
-    # bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 ENV HOME=/home/dl
 WORKDIR $HOME
+# add oh-my-zsh configuration
+COPY .oh-my-zsh $HOME/.oh-my-zsh
+COPY .zshrc ${HOME}
 USER dl
-
-# Configure oh-my-zsh
-ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
-
