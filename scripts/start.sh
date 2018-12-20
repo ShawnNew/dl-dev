@@ -33,6 +33,7 @@ nvidia-docker run --rm \
     -e DISPLAY=${DISPLAY} \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME/Downloads:/home/dl/Downloads \
+    -v Configs:/home/dl \
     -v Codes:/home/dl/Codes \
     -p 6006:6006 \
     ${REPO_NAME}/${CONTAINER_NAME}:${VERSION} \
