@@ -99,10 +99,6 @@ ENV HOME=/home/dl
 WORKDIR $HOME
 USER dl
 
-# Initialization
-# ADD ./setup.sh /tmp/setup.sh
-# RUN chmod -x /tmp/setup.sh
-
 # Configure oh-my-zsh
 ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 
 
