@@ -59,8 +59,6 @@ RUN apt-get update && apt-get install -y \
     git lfs install &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
-
 # For caffe
 ENV CAFFE_ROOT=/opt/caffe
 WORKDIR $CAFFE_ROOT
@@ -79,12 +77,31 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 
 # For Tensorflow
 RUN pip2 install --upgrade tensorflow-gpu \
-    opencv-python
+    opencv-python \
+    python-dateutil
+
 EXPOSE 6006
 
+# Add user
+RUN adduser dl --gecos "" --disabled-password &&\
+    echo "abcd\nabcd" | passwd dl &&\
+    chsh -s /bin/zsh dl &&\
+    adduser dl sudo &&\
+    cd /home &&\
+    chown -R dl:dl dl &&\
+    cd /home/dl &&\
+    mkdir -p Codes &&\
+    chown dl:dl Codes &&\ 
+    su dl 
+    # bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+ENV HOME=/home/dl
+WORKDIR $HOME
+USER dl
+
 # Initialization
-ADD ./setup.sh /tmp/setup.sh
-RUN chmod -x /tmp/setup.sh
+# ADD ./setup.sh /tmp/setup.sh
+# RUN chmod -x /tmp/setup.sh
 
 # Configure oh-my-zsh
 ENTRYPOINT bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 

@@ -3,13 +3,6 @@
 # Caffe environment starting script.
 #
 
-# ------------------------ Variables. ----------------------------
-REPO_NAME=niuchenxiao
-CONTAINER_NAME=dl-dev
-VERSION=latest
-
-echo "Repo name is: ${REPO_NAME}."
-echo "Container name is: ${CONTAINER_NAME}"
 
 # ----------------------- Nvidia docker ---------------------------
 if ! nvidia-docker --version ; then
@@ -36,27 +29,3 @@ if ! nvidia-docker --version ; then
 else
     echo "We got nvidia-docker on the system, start."
 fi
-
-# ---------------------- Starting into image -----------------------
-echo "Start into docker image: ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}"
-
-if ! docker ps -a | grep ${CONTAINER_NAME};then
-    echo "No such container named ${CONTAINER_NAME}, starting."
-else
-    docker rm ${CONTAINER_NAME}
-fi
-echo "Pulling image from docker hub, please check your internet connection."
-docker pull ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
-
-nvidia-docker run -it \
-    --net="host" \
-    --name=${CONTAINER_NAME} \
-    -e DISPLAY=${DISPLAY} \
-    -e MYUID=$(id -u) \
-    -e MYGID=$(id -g) \
-    -e MYUSERNAME=$(id -un) \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v $HOME:$HOME \
-    -w $HOME \
-    -p 6006:6006 \
-    ${REPO_NAME}/${CONTAINER_NAME}:${VERSION}
