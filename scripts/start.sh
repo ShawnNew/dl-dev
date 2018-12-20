@@ -35,5 +35,5 @@ nvidia-docker run --rm \
     -v $HOME/Downloads:/home/dl/Downloads \
     -v Codes:/home/dl/Codes \
     -p 6006:6006 \
-    test \
+    ${REPO_NAME}/${CONTAINER_NAME}:${VERSION} \
     "/bin/zsh"
