@@ -62,13 +62,14 @@ RUN apt-get update && apt-get install -y \
 # For caffe
 ENV CAFFE_ROOT=/opt/caffe
 WORKDIR $CAFFE_ROOT
-RUN git clone https://github.com/BVLC/caffe.git . &&\
+COPY caffe $CAFFE_ROOT
+RUN cd ${CAFFE_ROOT} &&\
     pip2 install --upgrade pip && \
     cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
     git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
     mkdir build && cd build && \
     cmake -DUSE_CUDNN=1 -DUSE_NCCL=1 .. && \
-    make
+    make -j8
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
