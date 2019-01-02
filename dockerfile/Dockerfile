@@ -80,7 +80,8 @@ RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 RUN pip2 install --upgrade tensorflow-gpu \
     opencv-python \
     python-dateutil \
-    scikit-learn
+    scikit-learn \
+    matplotlib==2.0.2
 
 EXPOSE 6006
 
