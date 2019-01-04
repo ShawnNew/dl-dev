@@ -13,7 +13,7 @@ Support deep-learning platform list:
 * [NVIDIA](https://www.nvidia.com/object/unix.html) drivers ~= 361.93 (untested on older versions)
 
 
-### How to use
+### Get started(setup)
 * First, you should download docker yourself :). Check the following infomation:
     * For [Mac](https://docs.docker.com/docker-for-mac/install/#what-to-know-before-you-install).
     * For [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
@@ -24,13 +24,16 @@ Support deep-learning platform list:
 * Reboot by invoking command `sudo reboot`.
 * Change directory into `cd $DIR-TO-DL-DEV`.
 * Install nvidia-docker for GPU usage, run command `./scripts/setup_nvidia_docker.sh`.
-* Then you can start docker by issuing the command `./scripts/start.sh`.
-* To get into the docker container, run `./scripts/into.sh`. It should looks like this:
+
+### How to use docker container and the dl-dev image
+You can learn some basic docker information at docker's website [here](https://docs.docker.com/get-started/). I recommend you exercise the tutorial around.
+* To start a container named dl-dev, you can do it by running run the command `./scripts/start.sh`. ***Note: this process is only needed if you have not start that container on the host before.*** It is only needed if you reboot your computer.
+* Everytime you want to dive into the container and start programming, just run `./scripts/into.sh`. It should looks like this:
   
   ![login](docs/docker-into.png)
 
 ### About the docker container
-* Within the docker container(dl-dev for this specific project), you are login as user "dl" and the *passwd is set to "abcd"*.
+* Within the docker container(dl-dev for this specific project), you are login as user "dl" and the *passwd is already set to "abcd"*.
 * The directory of the workspace looks like this:
 
     ![workspace](docs/workspace.png)
@@ -41,8 +44,8 @@ Support deep-learning platform list:
 * `tmux`: The configuration of tmux is as default, you can check useful information in this [page](http://louiszhai.github.io/2017/09/30/tmux/).
 
 ### To build the docker image
-To build customized docker iamge yourself, please check [build reference](dockerfile/README.md).
+To build customized docker iamge yourself, please check [build reference](dockerfile/README.md). I do not recommand do this process unless you really need it. 
 
 ### Issues
-Please contact `niuc@mcmaster.ca` for any issue.
+Please contact `niuc@mcmaster.ca` for any issue. To add support, please also email me.
 
