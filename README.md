@@ -1,4 +1,6 @@
-## dl-dev (deep learning image and development support)
+## dl-dev (deep learning development)
+This docker image support a bunch of deep learning platform and easy to development. The developer is easy to debug and get around with all the dependencies within the container.
+
 Support deep-learning platform list:
 
 | Platform Name | Version | Language |
