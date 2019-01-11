@@ -1,3 +1,6 @@
-[submodule "dockerfile/.oh-my-zsh"]
-	path = dockerfile/.oh-my-zsh
+[submodule "dockerfile/gpu/.oh-my-zsh"]
+	path = dockerfile/gpu/.oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "dockerfile/cpu/.oh-my-zsh"]
+	path = dockerfile/cpu/.oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
