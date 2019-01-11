@@ -50,14 +50,14 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode st
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Git lfs for large data
-RUN apt-get update && apt-get install -y \
-    software-properties-common python-software-properties &&\
-    add-apt-repository ppa:git-core/ppa &&\
-    apt-get update &&\
-    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash &&\
-    apt-get install git-lfs &&\
-    git lfs install &&\
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y \
+#    software-properties-common python-software-properties &&\
+#    add-apt-repository ppa:git-core/ppa &&\
+#    apt-get update &&\
+#    curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash &&\
+#    apt-get install git-lfs &&\
+#    git lfs install &&\
+#    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # For caffe
 ENV CAFFE_ROOT=/opt/caffe
@@ -81,7 +81,14 @@ RUN pip2 install --upgrade tensorflow-gpu \
     opencv-python \
     python-dateutil \
     scikit-learn \
+    glog \
     matplotlib==2.0.2
+
+# change protobuf version
+RUN pip2 uninstall -y protobuf &&\
+    apt-get update && apt-get install -y \
+    python-protobuf &&\
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 6006
 
