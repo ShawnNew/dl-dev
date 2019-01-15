@@ -4,3 +4,6 @@
 [submodule "dockerfile/cpu/.oh-my-zsh"]
 	path = dockerfile/cpu/.oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "dockerfile/gpu/caffe"]
+	path = dockerfile/gpu/caffe
+	url = https://github.com/ShawnNew/caffe.git
