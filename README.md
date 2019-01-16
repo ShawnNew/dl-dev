@@ -22,14 +22,17 @@ Support deep-learning platform list:
     * For [Windows](https://docs.docker.com/docker-for-windows/install/#install-docker-for-windows-desktop-app).
     
     However, I highly recommend you use unix-like system since docker is well-supported on such OS.
-* After successfully installed docker, run command `sudo usermod -aG docker ${USER}` to add your self into user-group within system wide.
+* After successfully installed docker, run command `sudo usermod -aG docker ${USER}` to add yourself into user-group within system wide.
 * Reboot by invoking command `sudo reboot`.
 * Change directory into `cd $DIR-TO-DL-DEV`.
 * Install nvidia-docker for GPU usage, run command `./scripts/setup_nvidia_docker.sh`.
 
 ### How to use docker container and the dl-dev image
 You can learn some basic docker information at docker's website [here](https://docs.docker.com/get-started/). I recommend you exercise the tutorial around.
-* To start a container named dl-dev, you can do it by running run the command `./scripts/start.sh`. ***Note: this process is only needed if you have not start that container on the host before.*** It is only needed if you reboot your computer.
+* To start a container named dl-dev, you can do it by running the command `./scripts/start.sh`. ***Note: this process is only needed if you have not start that container on the host before.*** It is only needed if you first start or reboot your computer.
+
+    ![start](docs/docker-start.png)
+    as the above image said, container name is dl-dev. It will pull the newest image from docker hub and start the container.
 * Everytime you want to dive into the container and start programming, just run `./scripts/into.sh`. It should looks like this:
   
   ![login](docs/docker-into.png)
@@ -41,6 +44,7 @@ You can learn some basic docker information at docker's website [here](https://d
     ![workspace](docs/workspace.png)
 * The 'Downloads' directory is mount to your host machine's Downloads directory, so you can store your data outside docker.
 * The 'Codes' directory is designed to store your code and project, this directory is invisible outside docker.
+* In terms of caffe, unpooling layer is added and you can find the repo here: [caffe](https://github.com/ShawnNew/caffe/tree/ncx/dev)
 * `zsh`: Use oh-my-zsh theme for shell, and support zsh functionalities. Kindly check this [websit](https://www.jianshu.com/p/d194d29e488c?open_source=weibo_search).
 * `VS Code`： You can issue `code` in zsh, then the container will open IDE in host machine.
 * `tmux`: The configuration of tmux is as default, you can check useful information in this [page](http://louiszhai.github.io/2017/09/30/tmux/).
