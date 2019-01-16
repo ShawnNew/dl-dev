@@ -84,10 +84,12 @@ RUN pip2 install --upgrade tensorflow-gpu \
     glog \
     matplotlib==2.0.2
 
-# change protobuf version
-RUN pip2 uninstall -y protobuf &&\
+# change protobuf and numpy for caffe usage version
+RUN pip2 uninstall -y protobuf \
+    numpy &&\
     apt-get update && apt-get install -y \
     python-protobuf &&\
+    pip2 install numpy==1.15.4 &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 6006
