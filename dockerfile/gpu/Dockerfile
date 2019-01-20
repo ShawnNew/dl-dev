@@ -18,7 +18,20 @@ RUN apt-get update && apt-get upgrade -y  && apt-get install --no-install-recomm
     ca-certificates openssl \
     curl &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
-ADD Montreal /tmp/localtime
+
+# set locale
+RUN apt-get update &&\ 
+    apt-get install --reinstall -y locales &&\ 
+    sed -i 's/# pl_PL.UTF-8 UTF-8/pl_PL.UTF-8 UTF-8/' /etc/locale.gen &&\ 
+    locale-gen pl_PL.UTF-8 &&\
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+ 
+ENV LANG pl_PL.UTF-8  
+ENV LANGUAGE pl_PL  
+ENV LC_ALL pl_PL.UTF-8  
+
+# verify modified configuration
+RUN dpkg-reconfigure --frontend noninteractive locales  
 # Development
 RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' && \
     curl "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor > microsoft.gpg && \
