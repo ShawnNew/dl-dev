@@ -22,13 +22,13 @@ RUN apt-get update && apt-get upgrade -y  && apt-get install --no-install-recomm
 # set locale
 RUN apt-get update &&\ 
     apt-get install --reinstall -y locales &&\ 
-    sed -i 's/# pl_PL.UTF-8 UTF-8/pl_PL.UTF-8 UTF-8/' /etc/locale.gen &&\ 
-    locale-gen pl_PL.UTF-8 &&\
+    sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen &&\ 
+    locale-gen en_US.UTF-8 &&\
     apt-get clean && rm -rf /var/lib/apt/lists/*
  
-ENV LANG pl_PL.UTF-8  
-ENV LANGUAGE pl_PL  
-ENV LC_ALL pl_PL.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US  
+ENV LC_ALL en_US.UTF-8  
 
 # verify modified configuration
 RUN dpkg-reconfigure --frontend noninteractive locales  
