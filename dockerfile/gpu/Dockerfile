@@ -56,7 +56,7 @@ RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode st
     python-setuptools \
     python-scipy \
     python-tk \
-    ssh htop tmux vim iputils-ping nginx aptitude gitg meld net-tools wget \
+    ssh htop tmux vim vim-nox iputils-ping nginx aptitude gitg meld net-tools wget \
     git sudo zsh unzip zip screen \
     gcc gdb cppcheck libboost-all-dev cmake libxss1 \
     code &&\
